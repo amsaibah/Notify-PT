@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Blue Team Security</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="row">
+    <div class="title">AI Blue Team</div>
+    <span id="riskLevel" class="badge" data-level="unknown">UNKNOWN</span>
+  </div>
+
+  <div class="meta">
+    <div><span class="label">Site:</span> <span id="hostname">—</span></div>
+    <div class="row" style="margin-top: 6px;">
+      <div><span class="label">Score:</span> <span id="score">—</span></div>
+      <div><span class="label">Updated:</span> <span id="updatedAt">—</span></div>
+    </div>
+  </div>
+
+  <div class="sectionTitle">Security Checks</div>
+  <div id="checks" class="cards"></div>
+
+  <div class="sectionTitle">Detected Signals</div>
+  <ul id="reasons" class="list"></ul>
+
+  <div class="sectionTitle">Recommended Actions</div>
+  <div id="advice" class="advice"></div>
+
+  <div id="aiAdviceWrap" class="aiAdvice hidden">
+    <div class="sectionTitle">AI Risk Explanation</div>
+    <div id="aiAdvice" class="advice"></div>
+  </div>
+
+  <details class="settings" id="aiSettings">
+    <summary>AI Settings (via AI Proxy)</summary>
+    <div class="settingsBody">
+
+      <label class="settingRow">
+        <input type="checkbox" id="geminiEnabled" />
+        <span>Enable AI</span>
+      </label>
+
+      <label class="settingRow">
+        <input type="checkbox" id="aiProxyEnabled" />
+        <span>Use AI Proxy (read key from .env)</span>
+      </label>
+
+      <label class="settingRow">
+        <span class="settingLabel">Proxy URL</span>
+        <input type="text" id="aiProxyUrl" placeholder="http://localhost:3000/scan" autocomplete="off" />
+      </label>
+
+      <label class="settingRow">
+        <span class="settingLabel">Token</span>
+        <input type="password" id="aiProxyToken" placeholder="blue-team-ploy" autocomplete="off" />
+      </label>
+
+      <div class="row" style="margin-top: 8px;">
+        <button class="btn" id="btnSaveGemini" type="button">Save</button>
+        <button class="btn primary" id="btnAskAI" type="button">Ask AI</button>
+      </div>
+
+      <div class="settingsHint">
+        Run `npm run start` inside the `ai-proxy` folder and set `GEMINI_API_KEY` in `.env`
+      </div>
+
+    </div>
+  </details>
+
+  <p id="suppressed" class="suppressed"></p>
+
+  <div class="actions row">
+    <button class="btn" id="btnRescan">Rescan</button>
+    <button class="btn" id="btnCopy">Copy Report</button>
+  </div>
+
+  <div class="actions row">
+    <button class="btn" id="btnDismiss">Dismiss 10 Minutes</button>
+    <button class="btn primary" id="btnContinue">Close</button>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

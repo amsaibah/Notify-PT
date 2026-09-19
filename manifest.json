@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "AI Blue Team Security Awareness",
+  "version": "0.1.0",
+  "description": "Blue Team security awareness helper that highlights common web risks and provides safe-browsing tips.",
+
+  "action": {
+    "default_title": "Security Awareness",
+    "default_popup": "popup/popup.html"
+  },
+
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+
+  "permissions": ["storage", "notifications", "tabs", "scripting"],
+  "host_permissions": ["<all_urls>"]
+}
